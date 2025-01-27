@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Board</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<div class="navrow">
+<form action="{% url 'swap_tiles_view' %}" method="post">
+    {% csrf_token %}
+    
+    <div class="navrow backed">
+    <h2><div class="big">Select tiles to swap:</div></h2>
+    </div>
+    <div class="navrow">
+        {% for tile in current_hand %}
+            <div class="checkbox-option">
+                <input type="checkbox" id="{{ tile }}" name="swap_tiles" value="{{ tile.id }}" {% if tile.mode == "placing" %}disabled{% endif %}>
+                <label for="{{ tile }}"  {% if tile.mode == "placing" %}disabled{% endif %}>
+                    <h1>{{ tile.letter }}</h1>&nbsp;<h2><sub><sub>{{ tile.points }}</sub></sub></h2>
+                </label>
+            </div>
+        {% endfor %}
+            </div>
+    <div class="navrow">
+    <button class="b_wide" type="submit">Swap Selected Tiles</button>
+</div>
+</form>
+<div class="navrow">
+</form><form action="{% url 'home' %}" method="get">
+    <button class="b_wide" type="submit">Back to Home</button>
+</form>
+</div>
+</div>
