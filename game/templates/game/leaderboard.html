@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .b_wide{
+            width: 90vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="navrow backed">
+        <h1>Leaderboard</h1>
+    </div>
+    <br>&nbsp;<br>
+    <div class="navrow col">
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Words</th>
+            <th>Average Word Score</th>
+        </tr>
+        {% for profile in leaderboard %}
+        <tr class = "leads">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ profile.user.username }}</td>
+            <td>{{ profile.score }}</td>
+            <td>{{ profile.word_count }}</td>
+            <td>{% widthratio profile.score profile.word_count 1 %}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Words</th>
+            <th>Average Word Score</th>
+        </tr>
+    </table>
+    <div class="navrow">
+    </form><form action="{% url 'home' %}" method="get">
+        <button class="b_wide" type="submit">Back to the Game</button>
+    </form></div>
+</div>
+</body>
+</html>
